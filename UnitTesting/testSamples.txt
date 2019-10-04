@@ -1,0 +1,66 @@
+The test file has to start with test_ for pytest
+==================
+import pytest
+import [function to test]
+
+def test_for_result_with_message():
+    input = ""
+    actual = function(input)
+    expected = ""
+    message = (
+        "function(input)"
+        "return {0} instead of {1}.format(actual, expected)
+    )
+
+    assert actual is expected, message
+
+==================
+To run pytest in terminal
+> pytest testFile.py
+
+To see inside a test file for terminal
+> cat testFile.py
+
+==================
+How to compare flouts
+Use pytest.approx() to wrap the expected return value
+
+assert np.array([0.1]) == pytest.approx(np.array[0.1])
+==================
+To check types use isinstance(actual, type)
+==================
+Test for exceptions
+
+with pytest.raises("place error to test for here")
+    code to test
+
+example:
+with pytest.raises(ValueError)
+    sampleCode()
+
+if code does not raise that expected error,
+then the test will fail and another type of error is thrown
+
+
+#Test for exception
+with pytest.raises(ValueError) as exception_info # store the exception_info
+    sampleCode()
+
+#Check for correct message return
+assert exception_info.match("some string")
+***************
+import numpy as np
+import pytest
+from train import split_into_training_and_testing_sets
+
+def test_on_one_row():
+    test_argument = np.array([[1382.0, 390167.0]])
+   
+    # Store information about raised ValueError in exc_info
+    with pytest.raises(ValueError) as exc_info:
+      split_into_training_and_testing_sets(test_argument)
+    expected_error_msg = "Argument data_array must have at least 2 rows, it actually has just 1"
+    
+    # Check if the raised ValueError contains the correct message
+    assert exc_info.match(expected_error_msg)
+***************

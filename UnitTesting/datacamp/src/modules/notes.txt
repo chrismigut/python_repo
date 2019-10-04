@@ -1,0 +1,2 @@
+The goal of this folder,
+Is to create models of our features to prodict some sort of outcome

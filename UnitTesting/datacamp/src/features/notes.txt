@@ -1,0 +1,2 @@
+The goal of this folder,
+Is to process the the clean data into some sort of meaning and create features

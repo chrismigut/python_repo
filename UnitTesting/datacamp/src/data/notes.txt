@@ -1,0 +1,2 @@
+The goal of this folder,
+Is to clean the incoming data to send downstream
