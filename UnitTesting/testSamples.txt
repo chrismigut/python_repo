@@ -64,3 +64,61 @@ def test_on_one_row():
     # Check if the raised ValueError contains the correct message
     assert exc_info.match(expected_error_msg)
 ***************
+Stop tests on first failure
+> pytest -x 
+
+Run a subset of tests
+> pytest data/test_module.py
+
+Run only a single test
+> pytest data/test_module.py::TestFunctionClass
+> pytest data/test_module.py::TestFunctionClass::test_something
+
+To run test with more power use -k
+> pytest -k "pattern"
+
+Test class
+> pytest -k "TestFunctionClass"
+
+Run all test but this one in this class
+> pytest -k "TestFunctionClass and not test_something"
+***************
+If you need to ignore a test, use xfail
+
+import pytest
+
+class TestClass(object):
+
+    @pytest.mark.xfail
+    def test_something(self):
+        pass
+
+@pytest.mark.xfail(reason="Using TDD, model_test() has not yet been implemented")
+
+***************
+Ignore errors on a conditional, expected failures
+* not supported python version
+* some os version, etc
+
+import pytest
+
+class TestClass(object):
+
+    @pytest.mark.skipif(boolean_expression)
+    def test_something(self):
+        pass
+
+example: support python version 3.0 or higher
+import sys
+import pytest
+
+class TestClass(object):
+
+    @pytest.mark.skipif(sys.version_info < (3, 0), reason="only python 3.o or higher supported")
+    def test_something(self):
+        pass
+ 
+show reason why tests where skipped
+> !pytest -rs 
+-r reason
+-s skipped
